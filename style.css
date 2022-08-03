@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid #222;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+}
+
+thead, tfoot {
+    background-color: #3d2c18;
+    color: #fff;
+}
+
+tbody {
+    background-color: #f1dfb9;
+    color: #2e2212;
+}
+
+th, td {
+    border: 1px solid #111;
+    padding: 5px 10px;
+}
+
+td {
+    text-align: center;
+}
+
