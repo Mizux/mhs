@@ -1,7 +1,7 @@
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" height="64" width="64">
-<!--BG White-->
-<rect x="0" y="0" height="100%" width="100%" fill="#111" stroke="none"/>
+<!--BG-->
+<rect x="0" y="0" height="100%" width="100%" fill="#3D2C18" stroke="none"/>
 <!--Rect-->
-<rect x="20%" y="10%" width="60%" height="80%" fill="none" stroke="#F00"/>
-<polygon points=" 32,32 32,6.4 57.6,6.4 57.6,32 57.6,57.6 48.38400000000001,57.6" fill="#cc0000" stroke="none"></polygon>
+<rect x="20%" y="10%" width="60%" height="80%" fill="none" stroke="#F1DFB9" stroke-width="8"/>
+<polygon points="16,32 32,8 48,32 32,54" fill="#F1DFB9" stroke="none"></polygon>
 </svg>
