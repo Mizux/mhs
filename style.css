@@ -8,34 +8,29 @@ table {
   letter-spacing: 1px;
   font-family: sans-serif;
 }
-
 table thead, table tfoot {
   background-color: #3d2c18;
   color: #fff;
 }
-
 table tbody {
   background-color: #f1dfb9;
-  color: #2e2212;
+  color: #3d2c18;
 }
-
 table th, table td {
   border: 1px solid #111;
-  padding: 5px 10px;
 }
 table td {
   text-align: center;
 }
-
 table img {
   vertical-align: middle;
 }
-
 
 .container {
   position: relative;
   text-align: center;
   background-color: #202828;
+  padding: 5px 10px;
 }
 .id {
   position: absolute;
@@ -43,7 +38,11 @@ table img {
   left: 50%;
   transform: translate(-50%, 0%);
 
-  font-size: 0.5em;
+  font-size: 0.6em;
   background-color: #3d2c18;
   color: #fff;
+}
+
+.name {
+  font-size: 1.2em;
 }
