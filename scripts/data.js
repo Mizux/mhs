@@ -2,7 +2,7 @@
 // Weakness: slash | pierce | blunt
 let data = [
   ['ID', 'Logo', 'Name', 'Regular Atk', 'Special Atk', 'Weapon Weakness', 'Notes'],
-  ['000', 'Unknow', 'power technical speed', 'power technical speed', ['slash pierce blunt', ['Head', 'slash pierce blunt']], 'note'],
+  ['000', 'Unknow', 'power technical speed', 'power technical speed', ['slash pierce blunt', ['Part', 'slash pierce blunt']], 'note'],
   ['001', 'Aptonoth', 'power', '', ['slash pierce'], ''],
   ['002', 'Larinoth', 'technical', '', ['slash pierce'], ''],
   ['004', 'Velociprey', 'speed', '', ['slash pierce'], ''],
