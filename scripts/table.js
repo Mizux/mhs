@@ -91,15 +91,15 @@ function generateBody(table, data) {
     name.setAttribute('class', 'name');
     name.appendChild(document.createTextNode(row[1]));
 
-    // Atk
+    // Normal Atk
     const atk = tr.insertCell();
     atk.setAttribute('class', 'atk');
     addAtk(atk, row[2]);
 
-    // Special
-    const spe = tr.insertCell();
-    spe.setAttribute('class', 'atk');
-    addAtk(spe, row[3]);
+    // Enraged Atk
+    const enraged = tr.insertCell();
+    enraged.setAttribute('class', 'atk');
+    addAtk(enraged, row[3]);
 
     // Weapon Weakness
     const weapon = tr.insertCell();
