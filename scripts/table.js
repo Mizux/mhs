@@ -1,25 +1,32 @@
-// Return a HTML table.
+// Return an HTML table.
+const icon_size = 32;
 
+// Generate header line
 function generateHeader(table, data) {
   const head = table.createTHead();
   const tr = head.insertRow();
-  data.forEach(function(item) {
-    const td = tr.insertCell();
+  data.forEach(function(item, index) {
+    const th = document.createElement('th');
+    tr.appendChild(th);
     const txt = document.createTextNode(item);
-    td.appendChild(txt);
-  }
-  );
+    th.appendChild(txt);
+  });
 }
 
+// Generate a row
 function generateBody(table, data) {
   const body = table.createTBody();
-  data.forEach(function(row) {
+  data.forEach(function(row, index) {
     const tr = body.insertRow();
-    row.forEach(function(item) {
-      const td = tr.insertCell();
-      const txt = document.createTextNode(item);
-      td.appendChild(txt);
-    });
+    console.assert(row.length === 6, `row ${index}: Expect of size 6 (${row.length} instead)`);
+    // Id
+    const id = tr.insertCell();
+    id.appendChild(document.createTextNode(`No. ${row[0]}`));
+
+    // Name
+    const name = tr.insertCell();
+    name.setAttribute('class', 'name');
+    name.appendChild(document.createTextNode(row[1]));
   });
 }
 
