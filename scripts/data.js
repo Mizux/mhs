@@ -1,6 +1,6 @@
 // Atk: speed > power > technical > speed
 // Weapon Weakness: slash | pierce | blunt
-let data = [
+const data = [
   ['Id', 'Egg', 'Name', 'Normal', 'Enraged', 'Weapon Weakness'/*, 'Notes'*/],
   //['000', 'Unknow', 'power technical speed', 'power technical speed', ['slash pierce blunt', ['Part', 'slash pierce blunt']], 'note'],
   ['001', 'Aptonoth', 'power', '', ['slash pierce'], ''],
