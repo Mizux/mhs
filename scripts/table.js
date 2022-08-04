@@ -1,50 +1,6 @@
-// Return an HTML table.
 const icon_size = 32;
 
-// Atk type
-const power = 'power';
-const power_img = document.createElement('img');
-power_img.setAttribute('src', 'img/power.png');
-power_img.setAttribute('height', icon_size);
-power_img.setAttribute('width', icon_size);
-power_img.setAttribute('alt', power);
-
-const technical = 'technical';
-const technical_img = document.createElement('img');
-technical_img.setAttribute('src', './img/technical.png');
-technical_img.setAttribute('height', icon_size);
-technical_img.setAttribute('width', icon_size);
-technical_img.setAttribute('alt', technical);
-
-const speed = 'speed';
-const speed_img = document.createElement('img');
-speed_img.setAttribute('src', './img/speed.png');
-speed_img.setAttribute('height', icon_size);
-speed_img.setAttribute('width', icon_size);
-speed_img.setAttribute('alt', speed);
-
-// Weapon type
-const slash = 'slash';
-const slash_img = document.createElement('img');
-slash_img.setAttribute('src', 'img/slash.png');
-slash_img.setAttribute('height', icon_size);
-slash_img.setAttribute('width', icon_size);
-slash_img.setAttribute('alt', slash);
-
-const pierce = 'pierce';
-const pierce_img = document.createElement('img');
-pierce_img.setAttribute('src', './img/pierce.png');
-pierce_img.setAttribute('height', icon_size);
-pierce_img.setAttribute('width', icon_size);
-pierce_img.setAttribute('alt', pierce);
-
-const blunt = 'blunt';
-const blunt_img = document.createElement('img');
-blunt_img.setAttribute('src', './img/blunt.png');
-blunt_img.setAttribute('height', icon_size);
-blunt_img.setAttribute('width', icon_size);
-blunt_img.setAttribute('alt', blunt);
-
+// Return an HTML table with all data.
 export default function generateTable(data) {
   const table = document.createElement('table');
   generateHeader(table, data[0]);
@@ -86,6 +42,8 @@ function generateBody(table, data) {
     img.setAttribute('alt', blunt);
     logo.appendChild(img);
 
+    // TODO(mizux) Add egg
+
     // Name
     const name = tr.insertCell();
     name.setAttribute('class', 'name');
@@ -113,6 +71,30 @@ function generateBody(table, data) {
   });
 }
 
+// Atk stuff
+// Atk assets
+const power = 'power';
+const power_img = document.createElement('img');
+power_img.setAttribute('src', './assets/type/power.svg');
+power_img.setAttribute('height', icon_size);
+power_img.setAttribute('width', icon_size);
+power_img.setAttribute('alt', power);
+
+const technical = 'technical';
+const technical_img = document.createElement('img');
+technical_img.setAttribute('src', './assets/type/technical.svg');
+technical_img.setAttribute('height', icon_size);
+technical_img.setAttribute('width', icon_size);
+technical_img.setAttribute('alt', technical);
+
+const speed = 'speed';
+const speed_img = document.createElement('img');
+speed_img.setAttribute('src', './assets/type/speed.svg');
+speed_img.setAttribute('height', icon_size);
+speed_img.setAttribute('width', icon_size);
+speed_img.setAttribute('alt', speed);
+
+
 function addAtk(node, str) {
   if (str.includes(power)) {
     node.appendChild(power_img.cloneNode());
@@ -124,6 +106,44 @@ function addAtk(node, str) {
     node.appendChild(speed_img.cloneNode());
   }
 }
+
+// Weapon Stuff
+// Weapon assets
+const slash = 'slash';
+const slash_img = document.createElement('img');
+slash_img.setAttribute('src', './assets/weapon/slash.svg');
+slash_img.setAttribute('height', icon_size);
+slash_img.setAttribute('width', icon_size);
+slash_img.setAttribute('alt', slash);
+const slash_not_img = document.createElement('img');
+slash_not_img.setAttribute('src', './assets/weapon/slash-not.svg');
+slash_not_img.setAttribute('height', icon_size);
+slash_not_img.setAttribute('width', icon_size);
+slash_not_img.setAttribute('alt', slash + ' ineffective');
+
+const pierce = 'pierce';
+const pierce_img = document.createElement('img');
+pierce_img.setAttribute('src', './assets/weapon/pierce.svg');
+pierce_img.setAttribute('height', icon_size);
+pierce_img.setAttribute('width', icon_size);
+pierce_img.setAttribute('alt', pierce);
+const pierce_not_img = document.createElement('img');
+pierce_not_img.setAttribute('src', './assets/weapon/pierce-not.svg');
+pierce_not_img.setAttribute('height', icon_size);
+pierce_not_img.setAttribute('width', icon_size);
+pierce_not_img.setAttribute('alt', pierce + ' ineffective');
+
+const blunt = 'blunt';
+const blunt_img = document.createElement('img');
+blunt_img.setAttribute('src', './assets/weapon/blunt.svg');
+blunt_img.setAttribute('height', icon_size);
+blunt_img.setAttribute('width', icon_size);
+blunt_img.setAttribute('alt', blunt);
+const blunt_not_img = document.createElement('img');
+blunt_not_img.setAttribute('src', './assets/weapon/blunt-not.svg');
+blunt_not_img.setAttribute('height', icon_size);
+blunt_not_img.setAttribute('width', icon_size);
+blunt_not_img.setAttribute('alt', blunt + ' ineffective');
 
 function addWeaponWeakness(node, arr) {
   if (!Array.isArray(arr)) {
@@ -138,18 +158,26 @@ function addWeaponWeakness(node, arr) {
       node.appendChild(document.createTextNode(`${item[0]}: `));
       addWeaponWeakness(node, item.slice(1));
     }
+    node.appendChild(document.createElement('br'));
   });
 }
 
 function addPartWeaponWeakness(node, str) {
   if (str.includes(slash)) {
     node.appendChild(slash_img.cloneNode());
+  } else {
+    node.appendChild(slash_not_img.cloneNode());
   }
+
   if (str.includes(pierce)) {
     node.appendChild(pierce_img.cloneNode());
+  } else {
+    node.appendChild(pierce_not_img.cloneNode());
   }
+
   if (str.includes(blunt)) {
     node.appendChild(blunt_img.cloneNode());
+  } else {
+    node.appendChild(blunt_not_img.cloneNode());
   }
-  node.appendChild(document.createTextNode(' '));
 }
