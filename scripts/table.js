@@ -45,6 +45,13 @@ function generateBody(table, data) {
     // Egg
     const egg = tr.insertCell();
     egg.setAttribute('class', 'egg');
+    const egg_img = document.createElement('img');
+    egg_img.setAttribute('src', `./assets/egg/${row[0]}.svg`);
+    egg_img.setAttribute('height', icon_size*2);
+    egg_img.setAttribute('width', icon_size*2);
+    egg_img.setAttribute('alt', `${row[1]} egg`);
+    egg.appendChild(egg_img);
+
     // TODO(mizux) Add egg
 
     // Name
