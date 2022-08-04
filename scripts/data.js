@@ -1,7 +1,7 @@
 // Atk: speed > power > technical > speed
 // Weakness: slash | pierce | blunt
 let data = [
-  ['id', 'name', 'Normal Atk', 'Special Atk', 'Weapon Weakness', 'Notes'],
+  ['ID', 'Logo', 'Name', 'Normal Atk', 'Special Atk', 'Weapon Weakness', 'Notes'],
   ['000', 'Unknow', 'power technical speed', 'power technical speed', 'slash pierce blunt', 'note'],
   ['001', 'Aptonoth', 'power', '', 'slash pierce', ''],
   ['002', 'Larinoth', 'technical', '', 'slash pierce', ''],

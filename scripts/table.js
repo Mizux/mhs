@@ -73,33 +73,42 @@ function generateBody(table, data) {
     console.assert(row.length === 6, `row ${index}: Expect of size 6 (${row.length} instead)`);
     // Id
     const id = tr.insertCell();
+    id.setAttribute('class', 'id');
     id.appendChild(document.createTextNode(`No. ${row[0]}`));
+
+    // Logo
+    const logo = tr.insertCell();
+    logo.setAttribute('class', 'logo');
+    const img = document.createElement('img');
+    img.setAttribute('src', `./img/${row[0]}.png`);
+    img.setAttribute('height', icon_size*2);
+    img.setAttribute('width', icon_size*2);
+    img.setAttribute('alt', blunt);
+    logo.appendChild(img);
 
     // Name
     const name = tr.insertCell();
     name.setAttribute('class', 'name');
-    const img = document.createElement('img');
-    img.setAttribute('src', `./img/${row[0]}.png`);
-    img.setAttribute('height', icon_size);
-    img.setAttribute('width', icon_size);
-    img.setAttribute('alt', blunt);
-    name.appendChild(img);
     name.appendChild(document.createTextNode(row[1]));
 
     // Atk
     const atk = tr.insertCell();
+    atk.setAttribute('class', 'atk');
     addAtk(atk, row[2]);
 
     // Special
     const spe = tr.insertCell();
+    spe.setAttribute('class', 'atk');
     addAtk(spe, row[3]);
 
-    // Weakness
-    const weak = tr.insertCell();
-    addWeakness(weak, row[4]);
+    // Weapon Weakness
+    const weapon = tr.insertCell();
+    weapon.setAttribute('class', 'weapon');
+    addWeakness(weapon, row[4]);
 
     // Notes
     const note = tr.insertCell();
+    note.setAttribute('class', 'note');
     note.appendChild(document.createTextNode(row[5]));
   });
 }
