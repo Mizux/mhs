@@ -27,21 +27,24 @@ function generateBody(table, data) {
   data.forEach(function(row, index) {
     const tr = body.insertRow();
     console.assert(row.length === 6, `row ${index}: Expect of size 6 (${row.length} instead)`);
-    // Id
-    const id = tr.insertCell();
+
+    // Id/Icon
+    const first = tr.insertCell();
+    first.setAttribute('class', 'container');
+    const monster_img = document.createElement('img');
+    monster_img.setAttribute('src', `./assets/monster/${row[0]}.png`);
+    monster_img.setAttribute('height', icon_size*2);
+    monster_img.setAttribute('width', icon_size*2);
+    monster_img.setAttribute('alt', `${row[1]} icon`);
+    first.appendChild(monster_img);
+    const id = document.createElement('div');
     id.setAttribute('class', 'id');
     id.appendChild(document.createTextNode(`No. ${row[0]}`));
+    first.appendChild(id);
 
-    // Logo
-    const logo = tr.insertCell();
-    logo.setAttribute('class', 'logo');
-    const img = document.createElement('img');
-    img.setAttribute('src', `./img/${row[0]}.png`);
-    img.setAttribute('height', icon_size*2);
-    img.setAttribute('width', icon_size*2);
-    img.setAttribute('alt', blunt);
-    logo.appendChild(img);
-
+    // Egg
+    const egg = tr.insertCell();
+    egg.setAttribute('class', 'egg');
     // TODO(mizux) Add egg
 
     // Name
@@ -65,9 +68,9 @@ function generateBody(table, data) {
     addWeaponWeakness(weapon, row[4]);
 
     // Notes
-    const note = tr.insertCell();
-    note.setAttribute('class', 'note');
-    note.appendChild(document.createTextNode(row[5]));
+    //const note = tr.insertCell();
+    //note.setAttribute('class', 'note');
+    //note.appendChild(document.createTextNode(row[5]));
   });
 }
 

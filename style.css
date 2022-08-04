@@ -31,6 +31,19 @@ table img {
   vertical-align: middle;
 }
 
-.logo {
+
+.container {
+  position: relative;
+  text-align: center;
   background-color: #202828;
+}
+.id {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  font-size: 0.5em;
+  background-color: #3d2c18;
+  color: #fff;
 }
