@@ -78,6 +78,12 @@ function generateBody(table, data) {
     // Name
     const name = tr.insertCell();
     name.setAttribute('class', 'name');
+    const img = document.createElement('img');
+    img.setAttribute('src', `./img/${row[0]}.png`);
+    img.setAttribute('height', icon_size);
+    img.setAttribute('width', icon_size);
+    img.setAttribute('alt', blunt);
+    name.appendChild(img);
     name.appendChild(document.createTextNode(row[1]));
 
     // Atk
