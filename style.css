@@ -3,34 +3,34 @@ body {
 }
 
 table {
-    border-collapse: collapse;
-    border: 2px solid #222;
-    letter-spacing: 1px;
-    font-family: sans-serif;
-    font-size: .8rem;
+  border-collapse: collapse;
+  border: 2px solid #222;
+  letter-spacing: 1px;
+  font-family: sans-serif;
 }
 
-thead, tfoot {
-    background-color: #3d2c18;
-    color: #fff;
+table thead, table tfoot {
+  background-color: #3d2c18;
+  color: #fff;
 }
 
-tbody {
-    background-color: #f1dfb9;
-    color: #2e2212;
+table tbody {
+  background-color: #f1dfb9;
+  color: #2e2212;
 }
 
-th, td {
-    border: 1px solid #111;
-    padding: 5px 10px;
+table th, table td {
+  border: 1px solid #111;
+  padding: 5px 10px;
 }
-td {
-    text-align: center;
+table td {
+  text-align: center;
 }
 
-.name {
-  text-align: justify;
+table img {
+  vertical-align: middle;
 }
+
 .logo {
-    background-color: #202828;
+  background-color: #202828;
 }
