@@ -1,3 +1,4 @@
 dump/
 *.swp
 *.orig
+.DS_Store
