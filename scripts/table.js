@@ -104,7 +104,7 @@ function generateBody(table, data) {
     // Weapon Weakness
     const weapon = tr.insertCell();
     weapon.setAttribute('class', 'weapon');
-    addWeakness(weapon, row[4]);
+    addWeaponWeakness(weapon, row[4]);
 
     // Notes
     const note = tr.insertCell();
@@ -125,7 +125,23 @@ function addAtk(node, str) {
   }
 }
 
-function addWeakness(node ,str) {
+function addWeaponWeakness(node, arr) {
+  if (!Array.isArray(arr)) {
+    addPartWeaponWeakness(node, arr)
+    return;
+  }
+
+  arr.forEach(function(item) {
+    if (!Array.isArray(item)) {
+      addWeaponWeakness(node, item);
+    } else {
+      node.appendChild(document.createTextNode(`${item[0]}: `));
+      addWeaponWeakness(node, item.slice(1));
+    }
+  });
+}
+
+function addPartWeaponWeakness(node, str) {
   if (str.includes(slash)) {
     node.appendChild(slash_img.cloneNode());
   }
@@ -135,4 +151,5 @@ function addWeakness(node ,str) {
   if (str.includes(blunt)) {
     node.appendChild(blunt_img.cloneNode());
   }
+  node.appendChild(document.createTextNode(' '));
 }
