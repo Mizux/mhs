@@ -52,8 +52,6 @@ function generateBody(table, data) {
     egg_img.setAttribute('alt', `${row[1]} egg`);
     egg.appendChild(egg_img);
 
-    // TODO(mizux) Add egg
-
     // Name
     const name = tr.insertCell();
     name.setAttribute('class', 'name');
