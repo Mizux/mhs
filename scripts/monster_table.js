@@ -4,7 +4,7 @@ const icon_size = 32;
 const monster_size = 64;
 const egg_size = monster_size;
 
-function createImg(name, type, extension='.svg', size=icon_size) {
+function createImg(type, name, extension='.svg', size=icon_size) {
   const img = document.createElement('img');
   img.setAttribute('src', `./assets/${type}/${name}${extension}`);
   img.setAttribute('height', size);
@@ -41,10 +41,10 @@ function addBody(table, data) {
     const tr = body.insertRow();
     console.assert(row.length === 7, `row ${index}: Expect of size 7 (${row.length} instead)`);
 
-    // Id/Icon
+    // Icon/Id
     const first = tr.insertCell();
     first.setAttribute('class', 'container');
-    const monster_img = createImg(row[1], 'monster', '.png', monster_size);
+    const monster_img = createMonsterImg(row[1]);
     first.appendChild(monster_img);
     const id = document.createElement('div');
     id.setAttribute('class', 'id');
@@ -54,7 +54,7 @@ function addBody(table, data) {
     // Egg
     const egg = tr.insertCell();
     egg.setAttribute('class', 'egg');
-    const egg_img = createImg(row[2] ? row[1] : '_Unavailable', 'egg', '.svg', egg_size);
+    const egg_img = createEggImg(row[2] ? row[1] : '_Unavailable');
     egg.appendChild(egg_img);
 
     // Name
@@ -84,6 +84,14 @@ function addBody(table, data) {
   });
 }
 
+// Monster
+function createMonsterImg(name) {
+  return createImg('monster', name, '.png', monster_size);
+}
+function createEggImg(name) {
+  return createImg('egg', name, '.svg', egg_size);
+}
+
 // Atk stuff
 const atks = ['power', 'technical', 'speed', 'unknown'];
 const atks_img = new Map();
@@ -92,7 +100,7 @@ atks.forEach(function(atk) {
 });
 
 function createAtkTypeImg(name) {
-  return createImg(name, 'atk', '.svg');
+  return createImg('atk', name, '.svg');
 }
 
 function addAtkType(node, str) {
@@ -115,7 +123,7 @@ weapons.forEach(function(weapon) {
 });
 
 function createWeaponTypeImg(name) {
-  return createImg(name, 'weapon', '.svg');
+  return createImg('weapon', name, '.svg');
 }
 
 function addWeaponWeakness(node, arr) {
@@ -153,7 +161,7 @@ elements.forEach(function(element) {
 });
 
 function createElementTypeImg(name) {
-  return createImg(name, 'element', '.svg');
+  return createImg('element', name, '.svg');
 }
 
 function addElementWeakness(node, str) {
