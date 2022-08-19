@@ -85,7 +85,7 @@ function addBody(table, data) {
 }
 
 // Atk stuff
-const atks = ['power', 'technical', 'speed'];
+const atks = ['power', 'technical', 'speed', 'unknown'];
 const atks_img = new Map();
 atks.forEach(function(atk) {
   atks_img.set(atk, createAtkTypeImg(atk));
