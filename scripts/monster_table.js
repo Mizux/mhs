@@ -1,7 +1,7 @@
 import data from "./monster_data.js";
 
 const icon_size = 32;
-const monster_size = 64;
+const monster_size = icon_size * 2;
 const egg_size = monster_size;
 
 function createImg(type, name, extension='.svg', size=icon_size) {
