@@ -54,7 +54,7 @@ function addBody(table, data) {
     // Egg
     const egg = tr.insertCell();
     egg.setAttribute('class', 'egg');
-    const egg_img = createEggImg(row[2] ? row[1] : '_Unavailable');
+    const egg_img = createEggImg(row[2] ? row[1] : 'Unavailable');
     egg.appendChild(egg_img);
 
     // Name
