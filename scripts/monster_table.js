@@ -1,20 +1,32 @@
 import data from "./monster_data.js";
 
 const icon_size = 32;
+const monster_size = 64;
+const egg_size = monster_size;
+
+function createImg(name, type, extension='.svg', size=icon_size) {
+  const img = document.createElement('img');
+  img.setAttribute('src', `./assets/${type}/${name}${extension}`);
+  img.setAttribute('height', size);
+  img.setAttribute('width', size);
+  img.setAttribute('alt', name);
+  return img;
+}
 
 // Return an HTML table with all data.
 export default function generateMonsterTable() {
   const table = document.createElement('table');
-  generateHeader(table, data[0]);
-  generateBody(table, data.slice(1));
+  addHeader(table);
+  addBody(table, data);
   return table;
 }
 
 // Generate header line
-function generateHeader(table, data) {
+function addHeader(table) {
   const head = table.createTHead();
   const tr = head.insertRow();
-  data.forEach(function(item, index) {
+  const columns = ['Icon', 'Egg', 'Name', 'Atk', 'Mad', 'Weapon', 'Elem.']
+  columns.forEach(function(item, /*index*/) {
     const th = document.createElement('th');
     tr.appendChild(th);
     const txt = document.createTextNode(item);
@@ -22,21 +34,17 @@ function generateHeader(table, data) {
   });
 }
 
-// Generate a row
-function generateBody(table, data) {
+// Generate each row
+function addBody(table, data) {
   const body = table.createTBody();
   data.forEach(function(row, index) {
     const tr = body.insertRow();
-    console.assert(row.length === 6, `row ${index}: Expect of size 6 (${row.length} instead)`);
+    console.assert(row.length === 7, `row ${index}: Expect of size 7 (${row.length} instead)`);
 
     // Id/Icon
     const first = tr.insertCell();
     first.setAttribute('class', 'container');
-    const monster_img = document.createElement('img');
-    monster_img.setAttribute('src', `./assets/monster/${row[0]}.png`);
-    monster_img.setAttribute('height', icon_size*2);
-    monster_img.setAttribute('width', icon_size*2);
-    monster_img.setAttribute('alt', `${row[1]} icon`);
+    const monster_img = createImg(row[1], 'monster', '.png', monster_size);
     first.appendChild(monster_img);
     const id = document.createElement('div');
     id.setAttribute('class', 'id');
@@ -46,11 +54,7 @@ function generateBody(table, data) {
     // Egg
     const egg = tr.insertCell();
     egg.setAttribute('class', 'egg');
-    const egg_img = document.createElement('img');
-    egg_img.setAttribute('src', `./assets/egg/${row[0]}.svg`);
-    egg_img.setAttribute('height', icon_size*2);
-    egg_img.setAttribute('width', icon_size*2);
-    egg_img.setAttribute('alt', `${row[1]} egg`);
+    const egg_img = createImg(row[2] ? row[1] : '_Unavailable', 'egg', '.svg', egg_size);
     egg.appendChild(egg_img);
 
     // Name
@@ -61,98 +65,58 @@ function generateBody(table, data) {
     // Normal Atk
     const atk = tr.insertCell();
     atk.setAttribute('class', 'atk');
-    addAtk(atk, row[2]);
+    addAtkType(atk, row[3]);
 
     // Enraged Atk
     const enraged = tr.insertCell();
     enraged.setAttribute('class', 'atk');
-    addAtk(enraged, row[3]);
+    addAtkType(enraged, row[4]);
 
     // Weapon Weakness
     const weapon = tr.insertCell();
     weapon.setAttribute('class', 'weapon');
-    addWeaponWeakness(weapon, row[4]);
+    addWeaponWeakness(weapon, row[5]);
 
-    // Notes
-    //const note = tr.insertCell();
-    //note.setAttribute('class', 'note');
-    //note.appendChild(document.createTextNode(row[5]));
+    // Type Weakness
+    const element = tr.insertCell();
+    element.setAttribute('class', 'element');
+    addElementWeakness(element, row[6]);
   });
 }
 
 // Atk stuff
-// Atk assets
-const power = 'power';
-const power_img = document.createElement('img');
-power_img.setAttribute('src', './assets/type/power.svg');
-power_img.setAttribute('height', icon_size);
-power_img.setAttribute('width', icon_size);
-power_img.setAttribute('alt', power);
+const atks = ['power', 'technical', 'speed'];
+const atks_img = new Map();
+atks.forEach(function(atk) {
+  atks_img.set(atk, createAtkTypeImg(atk));
+});
 
-const technical = 'technical';
-const technical_img = document.createElement('img');
-technical_img.setAttribute('src', './assets/type/technical.svg');
-technical_img.setAttribute('height', icon_size);
-technical_img.setAttribute('width', icon_size);
-technical_img.setAttribute('alt', technical);
+function createAtkTypeImg(name) {
+  return createImg(name, 'atk', '.svg');
+}
 
-const speed = 'speed';
-const speed_img = document.createElement('img');
-speed_img.setAttribute('src', './assets/type/speed.svg');
-speed_img.setAttribute('height', icon_size);
-speed_img.setAttribute('width', icon_size);
-speed_img.setAttribute('alt', speed);
-
-
-function addAtk(node, str) {
-  if (str.includes(power)) {
-    node.appendChild(power_img.cloneNode());
-  }
-  if (str.includes(technical)) {
-    node.appendChild(technical_img.cloneNode());
-  }
-  if (str.includes(speed)) {
-    node.appendChild(speed_img.cloneNode());
-  }
+function addAtkType(node, str) {
+  atks.forEach(function(atk) {
+    if (str.includes(atk)) {
+      node.appendChild(atks_img.get(atk).cloneNode());
+    }
+  });
 }
 
 // Weapon Stuff
-// Weapon assets
-const slash = 'slash';
-const slash_img = document.createElement('img');
-slash_img.setAttribute('src', './assets/weapon/slash.svg');
-slash_img.setAttribute('height', icon_size);
-slash_img.setAttribute('width', icon_size);
-slash_img.setAttribute('alt', slash);
-const slash_not_img = document.createElement('img');
-slash_not_img.setAttribute('src', './assets/weapon/slash-not.svg');
-slash_not_img.setAttribute('height', icon_size);
-slash_not_img.setAttribute('width', icon_size);
-slash_not_img.setAttribute('alt', slash + ' ineffective');
+const weapons = ['slash', 'pierce', 'blunt'];
+const weapons_img = new Map();
+weapons.forEach(function(weapon) {
+  weapons_img.set(weapon, createWeaponTypeImg(weapon));
+});
+const weapons_not_img = new Map();
+weapons.forEach(function(weapon) {
+  weapons_not_img.set(weapon, createWeaponTypeImg(weapon + '-not'));
+});
 
-const pierce = 'pierce';
-const pierce_img = document.createElement('img');
-pierce_img.setAttribute('src', './assets/weapon/pierce.svg');
-pierce_img.setAttribute('height', icon_size);
-pierce_img.setAttribute('width', icon_size);
-pierce_img.setAttribute('alt', pierce);
-const pierce_not_img = document.createElement('img');
-pierce_not_img.setAttribute('src', './assets/weapon/pierce-not.svg');
-pierce_not_img.setAttribute('height', icon_size);
-pierce_not_img.setAttribute('width', icon_size);
-pierce_not_img.setAttribute('alt', pierce + ' ineffective');
-
-const blunt = 'blunt';
-const blunt_img = document.createElement('img');
-blunt_img.setAttribute('src', './assets/weapon/blunt.svg');
-blunt_img.setAttribute('height', icon_size);
-blunt_img.setAttribute('width', icon_size);
-blunt_img.setAttribute('alt', blunt);
-const blunt_not_img = document.createElement('img');
-blunt_not_img.setAttribute('src', './assets/weapon/blunt-not.svg');
-blunt_not_img.setAttribute('height', icon_size);
-blunt_not_img.setAttribute('width', icon_size);
-blunt_not_img.setAttribute('alt', blunt + ' ineffective');
+function createWeaponTypeImg(name) {
+  return createImg(name, 'weapon', '.svg');
+}
 
 function addWeaponWeakness(node, arr) {
   if (!Array.isArray(arr)) {
@@ -172,21 +136,30 @@ function addWeaponWeakness(node, arr) {
 }
 
 function addPartWeaponWeakness(node, str) {
-  if (str.includes(slash)) {
-    node.appendChild(slash_img.cloneNode());
-  } else {
-    node.appendChild(slash_not_img.cloneNode());
-  }
+  weapons.forEach(function(weapon) {
+    if (str.includes(weapon)) {
+      node.appendChild(weapons_img.get(weapon).cloneNode());
+    } else {
+      node.appendChild(weapons_not_img.get(weapon).cloneNode());
+    }
+  });
+}
 
-  if (str.includes(pierce)) {
-    node.appendChild(pierce_img.cloneNode());
-  } else {
-    node.appendChild(pierce_not_img.cloneNode());
-  }
+// Element stuff
+const elements = ['none', 'water', 'fire', 'ice', 'thunder', 'dragon'];
+const elements_img = new Map();
+elements.forEach(function(element) {
+  elements_img.set(element, createElementTypeImg(element));
+});
 
-  if (str.includes(blunt)) {
-    node.appendChild(blunt_img.cloneNode());
-  } else {
-    node.appendChild(blunt_not_img.cloneNode());
-  }
+function createElementTypeImg(name) {
+  return createImg(name, 'element', '.svg');
+}
+
+function addElementWeakness(node, str) {
+  elements.forEach(function(element) {
+    if (str.includes(element)) {
+      node.appendChild(elements_img.get(element).cloneNode());
+    }
+  });
 }
