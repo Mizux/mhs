@@ -1,11 +1,12 @@
+import data from "./monster_data.js";
+
 const icon_size = 32;
 
 // Return an HTML table with all data.
-export default function generateTable(data) {
+export default function generateMonsterTable() {
   const table = document.createElement('table');
   generateHeader(table, data[0]);
   generateBody(table, data.slice(1));
-  console.log({table});
   return table;
 }
 

@@ -1,12 +1,9 @@
-// Table struct
-import data from "./data.js";
-import generateTable from "./table.js";
+import generateMonsterTable from "./monster_table.js";
 
 function redraw() {
-  document.body.appendChild(generateTable(data));
-  //const node = document.getElementById("main-div")
-  //node.replaceChildren(generateTable(data));
-  //console.log(generateTable(data))
+  const node = document.getElementById("monster-div")
+  node.replaceChildren(generateMonsterTable());
+  //console.log(generateMonsterTable())
 }
 
 redraw();
